@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from net import run_inference
+from language_model import llm
 import os
 
 app = Flask(__name__)
@@ -28,7 +29,7 @@ def upload_image():
         file.save(file_path)
         return jsonify(
             {
-                "message": run_inference(file.filename)
+                "message": llm(prompt= run_inference(file.filename)) 
             }), 201
 
 if __name__ == '__main__':
